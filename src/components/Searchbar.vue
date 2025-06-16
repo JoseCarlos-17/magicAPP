@@ -1,7 +1,11 @@
 <template>
-  <el-row>
-    <el-input placeholder="For to search, press enter"
-      :value="search" @input="inputSearch" @change="searchingCard(search)">
+  <el-row style="display: flex;">
+    <el-input
+      placeholder="For to search, press enter"
+      :value="search"
+      @input="inputSearch"
+      @change="searchingCard(search)"
+    >
     </el-input>
   </el-row>
 </template>
@@ -10,23 +14,14 @@
 import { mapState, mapActions } from 'vuex'
 export default {
   computed: {
-    ...mapState([
-      'search',
-      'cardsList'
-    ])
+    ...mapState(['search', 'cardsList'])
   },
 
   methods: {
-    ...mapActions([
-      'inputSearch'
-    ]),
+    ...mapActions(['inputSearch']),
 
     searchingCard (search) {
-      this.inputSearch(search)
-      this.$router.push({
-        name: `cardlist`,
-        params: { cardsList: search }
-      })
+      this.$router.push({ name: 'cardslist', params: { search: search } })
     }
   }
 }
