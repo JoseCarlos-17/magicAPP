@@ -1,40 +1,32 @@
 <template>
-  <div>
-    <el-row v-if="cardsList">
-      <el-col class="list">
-        <el-row v-for="card in cardsList" :key="card.id" class="card">
-          <el-col>
-            <img v-if="card.image_uris" :src="card.image_uris.normal"
-              class="card-image" @click="chosedCard(card)">
-          </el-col>
-        </el-row>
-      </el-col>
-    </el-row>
-  </div>
+  <CardListComponent
+    :cardsList="cardsList"
+    :chosedCard="chosedCard"
+  />
 </template>
 
 <script>
 import { mapActions, mapState } from 'vuex'
+import CardListComponent from '../components/CardListComponent.vue'
 export default {
+  name: 'CardList',
+
+  components: {
+    CardListComponent
+  },
+
   computed: {
-    ...mapState([
-      'cardsList',
-      'search'
-    ])
+    ...mapState(['cardsList', 'search'])
   },
 
   watch: {
     search () {
-      setTimeout(() => {
-        this.loadCardsList(this.search)
-      }, 1500)
+      setTimeout(() => this.loadCardsList(this.search), 1500)
     }
   },
 
   methods: {
-    ...mapActions([
-      'loadCardsList'
-    ]),
+    ...mapActions(['loadCardsList']),
 
     chosedCard (card) {
       this.$router.push({
