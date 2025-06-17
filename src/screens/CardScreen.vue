@@ -23,15 +23,15 @@ export default {
     ...mapActions(['loadCard']),
 
     backToTheCardList () {
-      this.$router.push({
-        name: `cardlist`,
+      this.$router.back({
+        name: 'cardslist',
         params: { cardsList: this.search }
       })
     }
   },
 
   mounted () {
-    this.loadCard(this.$route.query.chosedcard.name)
+    this.loadCard(this.$route.params.card)
   }
 }
 </script>

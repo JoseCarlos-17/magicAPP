@@ -15,23 +15,9 @@ export default new Router({
       component: Layout,
       redirect: 'mainscreen',
       children: [
-        {
-          path: 'mainscreen',
-          component: MainScreen,
-          name: 'mainscreen'
-        },
-
-        {
-          path: 'thecardlist/:cardlist',
-          component: CardList,
-          name: 'cardlist'
-        },
-
-        {
-          path: 'chosedcard/:card',
-          component: CardScreen,
-          name: 'chosedcard'
-        }
+        { path: 'mainscreen', component: MainScreen, name: 'mainscreen' },
+        { path: 'cardslist/:search', component: CardList, name: 'cardslist' },
+        { path: 'cardsList/:card', component: CardScreen, name: 'chosedcard' }
       ]
     }
   ]

@@ -29,15 +29,12 @@ export default {
     ...mapActions(['loadCardsList']),
 
     chosedCard (card) {
-      this.$router.push({
-        path: 'chosedcard/:card',
-        query: { chosedcard: card }
-      })
+      this.$router.push({ name: 'chosedcard', params: { card: card.name } })
     }
   },
 
   mounted () {
-    this.loadCardsList(this.$route.params.cardsList)
+    this.loadCardsList(this.$route.params.search)
   }
 }
 </script>
