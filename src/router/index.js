@@ -2,8 +2,8 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import MainScreen from '../screens/MainScreen'
 import Layout from '../layouts/Layout'
-import CardList from '../screens/CardList'
-import CardScreen from '../screens/CardScreen'
+const CardList = () => import('../screens/CardList')
+const CardScreen = () => import('../screens/CardScreen')
 
 Vue.use(Router)
 
