@@ -16,13 +16,7 @@ export default {
   },
 
   computed: {
-    ...mapState(['cardsList', 'search'])
-  },
-
-  watch: {
-    search () {
-      setTimeout(() => this.loadCardsList(this.search), 1500)
-    }
+    ...mapState(['cardsList'])
   },
 
   methods: {

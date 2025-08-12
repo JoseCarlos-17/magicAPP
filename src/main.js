@@ -15,12 +15,6 @@ export const MTG = axios.create({
   baseURL: 'https://api.scryfall.com/'
 })
 
-MTG.interceptors.response.use(response => {
-  return response
-}, (error) => {
-  return Promise.reject(error)
-})
-
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

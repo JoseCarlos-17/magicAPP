@@ -10,7 +10,7 @@
           </transition>
         </el-main>
 
-        <Footer/>
+        <Footer />
       </el-col>
     </el-row>
   </div>

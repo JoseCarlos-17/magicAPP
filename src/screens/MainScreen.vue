@@ -2,28 +2,16 @@
   <div>
     <el-row type="flex" justify="center">
       <el-col :span="22" :xs="22">
-
         <el-row class="main-page">
           <h1 id="main-text">Write the name of a Card</h1>
         </el-row>
-
       </el-col>
     </el-row>
   </div>
 </template>
 
 <script>
-import { mapActions } from 'vuex'
 export default {
-  methods: {
-    ...mapActions([
-      'cleanSearchBar'
-    ])
-  },
-
-  mounted () {
-    this.cleanSearchBar()
-  }
 }
 </script>
 
