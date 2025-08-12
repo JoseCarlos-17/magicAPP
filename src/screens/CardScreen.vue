@@ -30,7 +30,7 @@ export default {
     }
   },
 
-  mounted () {
+  beforeMount () {
     this.loadCard(this.$route.params.card)
   }
 }

@@ -16,16 +16,10 @@
     </el-col>
   </el-row>
 </template>
-
 <script>
+
 export default {
-  props: ['cardsList', 'chosedCard'],
-
-  data () {
-    return {
-
-    }
-  }
+  props: ['cardsList', 'chosedCard']
 }
 </script>
 

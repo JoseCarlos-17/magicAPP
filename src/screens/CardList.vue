@@ -1,18 +1,24 @@
 <template>
-  <CardListComponent
-    :cardsList="cardsList"
-    :chosedCard="chosedCard"
-  />
+  <div>
+    <CardListComponent
+      :cardsList="cardsList"
+      :chosedCard="chosedCard"
+    />
+
+    <Pagination :totalCards="cardsList"/>
+  </div>
 </template>
 
 <script>
+import Pagination from '../components/Pagination.vue'
 import { mapActions, mapState } from 'vuex'
 import CardListComponent from '../components/CardListComponent.vue'
 export default {
   name: 'CardList',
 
   components: {
-    CardListComponent
+    CardListComponent,
+    Pagination
   },
 
   computed: {
@@ -27,7 +33,7 @@ export default {
     }
   },
 
-  mounted () {
+  beforeMount () {
     this.loadCardsList(this.$route.params.search)
   }
 }
