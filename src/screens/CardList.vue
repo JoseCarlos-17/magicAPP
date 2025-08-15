@@ -1,11 +1,12 @@
 <template>
   <div>
     <CardListComponent
-      :cardsList="cardsList"
+      :cardsList="paginatedCards"
       :chosedCard="chosedCard"
     />
 
-    <Pagination :totalCards="cardsList"/>
+    <!-- <Pagination
+      :totalCards="cardsList"/> -->
   </div>
 </template>
 
@@ -21,8 +22,13 @@ export default {
     Pagination
   },
 
-  computed: {
-    ...mapState(['cardsList'])
+  data () {
+    return {
+      perPage: 7,
+      pages: [],
+      current_page: 1,
+      page: 1
+    }
   },
 
   methods: {
@@ -30,6 +36,37 @@ export default {
 
     chosedCard (card) {
       this.$router.push({ name: 'chosedcard', params: { card: card.name } })
+    },
+
+    setPages () {
+      let numberOfPages = Math.ceil(this.cardsList.length / this.perPage)
+      for (let index = 1; index <= numberOfPages; index++) {
+        this.pages.push(index)
+      }
+    },
+
+    paginate (cards) {
+      let page = this.page
+      let perPage = this.perPage
+      let from = (page * perPage) - perPage
+      let to = (page * perPage)
+      return cards.slice(from, to)
+    }
+  },
+
+  computed: {
+    ...mapState(['cardsList']),
+
+    paginatedCards () {
+      console.log(this.paginate(this.cardsList))
+
+      return this.paginate(this.cardsList)
+    }
+  },
+
+  watch: {
+    cardsList () {
+      this.setPages()
     }
   },
 
@@ -68,6 +105,6 @@ export default {
 
   .card-image:hover{
     box-shadow: 0px 0px 15px white;
-    transition: ease 0.8s;
+    transition: ease 0.2s;
   }
 </style>
