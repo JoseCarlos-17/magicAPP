@@ -1,4 +1,4 @@
-# Magic-APP
+# Magic-App
 
 projeto desenvolvido em Vue.js 2, com Vue-router, Vuex e Axios.
 
