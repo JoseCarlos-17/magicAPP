@@ -5,8 +5,12 @@
       :chosedCard="chosedCard"
     />
 
-    <!-- <Pagination
-      :totalCards="cardsList"/> -->
+    <Pagination
+      :totalCards="cardsList"
+      @next="nextPage"
+      @prev="prevPage"
+      @current-page="getCurrentPage"
+    />
   </div>
 </template>
 
@@ -24,9 +28,8 @@ export default {
 
   data () {
     return {
-      perPage: 7,
+      perPage: 8,
       pages: [],
-      current_page: 1,
       page: 1
     }
   },
@@ -45,6 +48,18 @@ export default {
       }
     },
 
+    nextPage () {
+      this.page++
+    },
+
+    prevPage () {
+      this.page--
+    },
+
+    getCurrentPage (val) {
+      this.page = val
+    },
+
     paginate (cards) {
       let page = this.page
       let perPage = this.perPage
@@ -58,8 +73,6 @@ export default {
     ...mapState(['cardsList']),
 
     paginatedCards () {
-      console.log(this.paginate(this.cardsList))
-
       return this.paginate(this.cardsList)
     }
   },
