@@ -1,18 +1,23 @@
 <template>
   <div class="block">
-    <span class="demonstration">When you have few pages</span>
+    <span class="demonstration"></span>
     <el-pagination
       layout="prev, pager, next"
-      :total="totalCards">
-    </el-pagination>
+      :background="true"
+      :total="totalCards.length"
+      @next-click="$emit('next')"
+      @prev-click="$emit('prev')"
+      @current-change="$emit('current-page', $event)"
+    />
 </div>
 </template>
 
 <script>
-  export default {
-    props: ['totalCards']
-  }
+export default {
+  props: ['totalCards']
+}
 </script>
 
 <style>
+
 </style>

@@ -1,22 +1,37 @@
 <template>
-  <CardListComponent
-    :cardsList="cardsList"
-    :chosedCard="chosedCard"
-  />
+  <div>
+    <CardListComponent
+      :cardsList="paginatedCards"
+      :chosedCard="chosedCard"
+    />
+
+    <Pagination
+      :totalCards="cardsList"
+      @next="nextPage"
+      @prev="prevPage"
+      @current-page="getCurrentPage"
+    />
+  </div>
 </template>
 
 <script>
+import Pagination from '../components/Pagination.vue'
 import { mapActions, mapState } from 'vuex'
 import CardListComponent from '../components/CardListComponent.vue'
 export default {
   name: 'CardList',
 
   components: {
-    CardListComponent
+    CardListComponent,
+    Pagination
   },
 
-  computed: {
-    ...mapState(['cardsList'])
+  data () {
+    return {
+      perPage: 8,
+      pages: [],
+      page: 1
+    }
   },
 
   methods: {
@@ -24,10 +39,51 @@ export default {
 
     chosedCard (card) {
       this.$router.push({ name: 'chosedcard', params: { card: card.name } })
+    },
+
+    setPages () {
+      let numberOfPages = Math.ceil(this.cardsList.length / this.perPage)
+      for (let index = 1; index <= numberOfPages; index++) {
+        this.pages.push(index)
+      }
+    },
+
+    nextPage () {
+      this.page++
+    },
+
+    prevPage () {
+      this.page--
+    },
+
+    getCurrentPage (val) {
+      this.page = val
+    },
+
+    paginate (cards) {
+      let page = this.page
+      let perPage = this.perPage
+      let from = (page * perPage) - perPage
+      let to = (page * perPage)
+      return cards.slice(from, to)
     }
   },
 
-  mounted () {
+  computed: {
+    ...mapState(['cardsList']),
+
+    paginatedCards () {
+      return this.paginate(this.cardsList)
+    }
+  },
+
+  watch: {
+    cardsList () {
+      this.setPages()
+    }
+  },
+
+  beforeMount () {
     this.loadCardsList(this.$route.params.search)
   }
 }
@@ -62,6 +118,6 @@ export default {
 
   .card-image:hover{
     box-shadow: 0px 0px 15px white;
-    transition: ease 0.8s;
+    transition: ease 0.2s;
   }
 </style>
