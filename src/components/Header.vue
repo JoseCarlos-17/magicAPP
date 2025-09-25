@@ -4,7 +4,11 @@
       <img src="../assets/Mlogo.png" width="250">
     </router-link>
 
-    <Searchbar />
+    <Searchbar
+      :search="search"
+      :searchingCard="searchingCard"
+      @update_value="$emit('update_value', $event)"
+    />
   </el-row>
 </template>
 
@@ -14,7 +18,9 @@ import Searchbar from '../components/Searchbar'
 export default {
   components: {
     Searchbar
-  }
+  },
+
+  props: ['search', 'searchingCard']
 }
 </script>
 

@@ -2,7 +2,8 @@
   <el-row style="display: flex;">
     <el-input
       placeholder="For to search, press enter"
-      v-model="search"
+      :value="search"
+      @input="$emit('update_value', $event)"
       @change="searchingCard"
     >
     </el-input>
@@ -10,40 +11,8 @@
 </template>
 
 <script>
-import { mapState, mapActions } from 'vuex'
 export default {
-  computed: {
-    ...mapState(['cardsList'])
-  },
-
-  data () {
-    return {
-      search: ''
-    }
-  },
-
-  methods: {
-    ...mapActions(['loadCardsList']),
-
-    searchingCard () {
-      if (this.$route.params.search) {
-        this.$router.push(
-          {
-            name: 'cardslist',
-            params: { search: this.search }
-          }
-        )
-        this.loadCardsList(this.search)
-      } else {
-        this.$router.push(
-          {
-            name: 'cardslist',
-            params: { search: this.search }
-          }
-        )
-      }
-    }
-  }
+  props: ['search', 'searchingCard']
 }
 </script>
 
