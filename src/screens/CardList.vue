@@ -56,8 +56,13 @@ export default {
       this.page--
     },
 
+    scrollToTop() {
+      window.scrollTo({ top: 0 });
+    },
+
     getCurrentPage (val) {
       this.page = val
+      this.scrollToTop()
     },
 
     paginate (cards) {
